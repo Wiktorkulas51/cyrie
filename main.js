@@ -13,7 +13,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL("https://localhost:3030");
+  mainWindow.loadURL("http://localhost:3000");
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
