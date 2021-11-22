@@ -2,6 +2,7 @@ import React from "react";
 // import "./App.css";
 import { Recorder } from "react-voice-recorder";
 import "react-voice-recorder/dist/index.css";
+let buffer;
 
 class App extends React.Component {
   constructor(props) {
@@ -22,8 +23,9 @@ class App extends React.Component {
 
   handleAudioStop(data) {
     console.log(data);
-
     this.setState({ audioDetails: data });
+    buffer = Buffer.from(data.chunks, "utf8");
+    // console.log(buffer);
   }
   handleAudioUpload(file) {
     console.log(file);
@@ -41,6 +43,7 @@ class App extends React.Component {
     };
     this.setState({ audioDetails: reset });
   }
+
   render() {
     return (
       <div>
@@ -49,7 +52,9 @@ class App extends React.Component {
           title={"New recording"}
           audioURL={this.state.audioDetails.url}
           showUIAudio
-          handleAudioStop={(data) => this.handleAudioStop(data)}
+          handleAudioStop={(data) => {
+            this.handleAudioStop(data);
+          }}
           handleAudioUpload={(data) => this.handleAudioUpload(data)}
           handleReset={() => this.handleReset()}
           mimeTypeToUseWhenRecording={`audio/webm`}
@@ -60,3 +65,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+export { buffer };
