@@ -24,8 +24,8 @@ class App extends React.Component {
   handleAudioStop(data) {
     console.log(data);
     this.setState({ audioDetails: data });
-    buffer = Buffer.from(data.chunks, "utf8");
-    // console.log(buffer);
+    buffer = Buffer.from(data, "binary");
+    console.log(buffer, "buf");
   }
   handleAudioUpload(file) {
     console.log(file);
