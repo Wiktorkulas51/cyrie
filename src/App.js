@@ -22,10 +22,10 @@ class App extends React.Component {
   }
 
   handleAudioStop(data) {
-    console.log(data);
     this.setState({ audioDetails: data });
-    buffer = Buffer.from(data, "binary");
-    console.log(buffer, "buf");
+    const buffer = data.blob.arrayBuffer();
+    // buffer = Buffer.from(data, "binary");
+    console.log(buffer);
   }
   handleAudioUpload(file) {
     console.log(file);
