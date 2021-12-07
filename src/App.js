@@ -2,7 +2,6 @@ import React from "react";
 // import "./App.css";
 import { Recorder } from "react-voice-recorder";
 import "react-voice-recorder/dist/index.css";
-let buffer;
 
 class App extends React.Component {
   constructor(props) {
@@ -22,10 +21,19 @@ class App extends React.Component {
   }
 
   handleAudioStop(data) {
-    this.setState({ audioDetails: data });
-    const buffer = data.blob.arrayBuffer();
-    // buffer = Buffer.from(data, "binary");
-    console.log(buffer);
+    try {
+      this.setState({ audioDetails: data });
+      const bufferPromise = data.blob.arrayBuffer();
+      bufferPromise.then((Response) => {
+        // const decoder = new TextDecoder("utf-8");
+
+        // const decodedData = decoder.decode(new Int16Array(Response));
+        const view = new Int32Array(Response);
+        console.log(view);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
   handleAudioUpload(file) {
     console.log(file);
@@ -66,4 +74,4 @@ class App extends React.Component {
 
 export default App;
 
-export { buffer };
+// export { buffer };
