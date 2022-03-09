@@ -21,18 +21,17 @@ class App extends React.Component {
   }
 
   handleAudioStop(data) {
+    this.setState({ audioDetails: data });
     try {
-      this.setState({ audioDetails: data });
       const bufferPromise = data.blob.arrayBuffer();
-      bufferPromise.then((Response) => {
-        // const decoder = new TextDecoder("utf-8");
-
-        // const decodedData = decoder.decode(new Int16Array(Response));
-        const view = new Int32Array(Response);
-        console.log(view);
+      bufferPromise.then((data) => {
+        const arr = new Uint8Array(data);
+        console.log(arr);
+        const str = String.fromCharCode.apply(String, arr);
+        console.log("str", str);
       });
     } catch (error) {
-      console.log(error);
+      console.log("err", error);
     }
   }
   handleAudioUpload(file) {
