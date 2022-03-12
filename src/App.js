@@ -22,13 +22,22 @@ class App extends React.Component {
 
   handleAudioStop(data) {
     this.setState({ audioDetails: data });
+
     try {
       const bufferPromise = data.blob.arrayBuffer();
+      // const d1 = new DataView(data);
+      console.log(data);
       bufferPromise.then((data) => {
         const arr = new Uint8Array(data);
         console.log(arr);
-        const str = String.fromCharCode.apply(String, arr);
-        console.log("str", str);
+
+        // const decoded = new TextDecoder().decode(arr);
+        // console.log(decoded);
+
+        // for (const el of arr) {
+        //   const str = String.fromCharCode.call(null, el);
+        //   // console.log("str", str);
+        // }
       });
     } catch (error) {
       console.log("err", error);
